@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Content - InstaUp</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="../index.html" class="flex items-center">
+                        <i class="fas fa-rocket text-blue-600 text-2xl mr-2"></i>
+                        <span class="text-xl font-bold text-gray-800">InstaUp</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="earn-coins.html" class="flex items-center text-gray-700 hover:text-blue-600">
+                        <i class="fas fa-coins text-yellow-500 mr-1"></i>
+                        <span id="navCoinBalance">500 Coins</span>
+                    </a>
+                    <a href="upload.html" class="text-gray-700 hover:text-blue-600">Upload</a>
+                    <a href="profile.html" class="text-gray-700 hover:text-blue-600">Profile</a>
+                    <button onclick="logout()" class="text-gray-700 hover:text-blue-600">Logout</button>
+                </div>
+                <div class="md:hidden">
+                    <button class="text-gray-700">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Upload Section -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="p-6">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Upload Content</h2>
+                
+                <!-- Upload Form -->
+                <form id="uploadForm" onsubmit="handleUpload(event)" class="space-y-6">
+                    <!-- Image Upload -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            Image
+                        </label>
+                        <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg" 
+                             id="dropZone">
+                            <div class="space-y-1 text-center">
+                                <div id="previewContainer" class="hidden mb-4">
+                                    <img id="imagePreview" class="mx-auto h-64 w-auto rounded-lg" src="" alt="Preview">
+                                </div>
+                                <div id="uploadIcon" class="flex text-sm text-gray-600">
+                                    <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-3"></i>
+                                </div>
+                                <div class="flex text-sm text-gray-600">
+                                    <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500">
+                                        <span>Upload a file</span>
+                                        <input id="file-upload" name="file-upload" type="file" class="sr-only" 
+                                               accept="image/*" onchange="previewImage(event)">
+                                    </label>
+                                    <p class="pl-1">or drag and drop</p>
+                                </div>
+                                <p class="text-xs text-gray-500">
+                                    PNG, JPG, GIF up to 10MB
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Caption -->
+                    <div>
+                        <label for="caption" class="block text-sm font-medium text-gray-700 mb-2">
+                            Caption
+                        </label>
+                        <textarea id="caption" name="caption" rows="3" 
+                                  class="shadow-sm focus:ring-blue-500 focus:border-blue-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md p-2"
+                                  placeholder="Write a caption for your post..."></textarea>
+                    </div>
+
+                    <!-- Hashtags -->
+                    <div>
+                        <label for="hashtags" class="block text-sm font-medium text-gray-700 mb-2">
+                            Hashtags
+                        </label>
+                        <input type="text" id="hashtags" name="hashtags" 
+                               class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border border-gray-300 rounded-md p-2"
+                               placeholder="#nature #photography">
+                        <p class="mt-1 text-sm text-gray-500">
+                            Separate hashtags with spaces
+                        </p>
+                    </div>
+
+                    <!-- Location -->
+                    <div>
+                        <label for="location" class="block text-sm font-medium text-gray-700 mb-2">
+                            Location (Optional)
+                        </label>
+                        <input type="text" id="location" name="location" 
+                               class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border border-gray-300 rounded-md p-2"
+                               placeholder="Add location">
+                    </div>
+
+                    <!-- Privacy Settings -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            Privacy
+                        </label>
+                        <select id="privacy" name="privacy" 
+                                class="mt-1 block w-full pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                            <option value="public">Public</option>
+                            <option value="followers">Followers Only</option>
+                            <option value="private">Private</option>
+                        </select>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="flex justify-end">
+                        <button type="submit" 
+                                class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            <i class="fas fa-cloud-upload-alt mr-2"></i>
+                            Upload Post
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Coin Earning Info -->
+        <div class="mt-8 bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="p-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">
+                    <i class="fas fa-coins text-yellow-500 mr-2"></i>
+                    Earn Coins with Your Posts
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="border rounded-lg p-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fas fa-heart text-red-500 mr-2"></i>
+                                <span>Get Likes</span>
+                            </div>
+                            <span class="text-blue-600">+5 coins</span>
+                        </div>
+                        <p class="mt-2 text-sm text-gray-600">Earn coins for each like on your post</p>
+                    </div>
+                    <div class="border rounded-lg p-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fas fa-comment text-blue-500 mr-2"></i>
+                                <span>Get Comments</span>
+                            </div>
+                            <span class="text-blue-600">+10 coins</span>
+                        </div>
+                        <p class="mt-2 text-sm text-gray-600">Earn coins for each comment on your post</p>
+                    </div>
+                    <div class="border rounded-lg p-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fas fa-share text-green-500 mr-2"></i>
+                                <span>Get Shares</span>
+                            </div>
+                            <span class="text-blue-600">+20 coins</span>
+                        </div>
+                        <p class="mt-2 text-sm text-gray-600">Earn coins when others share your post</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-5 right-5 hidden bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg">
+        <div class="flex items-center">
+            <i class="fas fa-check-circle mr-2"></i>
+            <span id="toastMessage"></span>
+        </div>
+    </div>
+
+    <script>
+        // Load user data
+        document.addEventListener('DOMContentLoaded', function() {
+            const userData = JSON.parse(localStorage.getItem('user')) || {
+                coins: 500
+            };
+            document.getElementById('navCoinBalance').textContent = userData.coins + ' Coins';
+        });
+
+        function showToast(message, isError = false) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            
+            toast.classList.remove('bg-green-500', 'bg-red-500');
+            toast.classList.add(isError ? 'bg-red-500' : 'bg-green-500');
+            
+            toastMessage.textContent = message;
+            toast.classList.remove('hidden');
+            
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
+        }
+
+        // Image preview functionality
+        function previewImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('imagePreview').src = e.target.result;
+                    document.getElementById('previewContainer').classList.remove('hidden');
+                    document.getElementById('uploadIcon').classList.add('hidden');
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Drag and drop functionality
+        const dropZone = document.getElementById('dropZone');
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropZone.addEventListener(eventName, highlight, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, unhighlight, false);
+        });
+
+        function highlight(e) {
+            dropZone.classList.add('border-blue-500');
+        }
+
+        function unhighlight(e) {
+            dropZone.classList.remove('border-blue-500');
+        }
+
+        dropZone.addEventListener('drop', handleDrop, false);
+
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const file = dt.files[0];
+
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('imagePreview').src = e.target.result;
+                    document.getElementById('previewContainer').classList.remove('hidden');
+                    document.getElementById('uploadIcon').classList.add('hidden');
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Handle form submission
+        function handleUpload(event) {
+            event.preventDefault();
+            
+            const caption = document.getElementById('caption').value;
+            const hashtags = document.getElementById('hashtags').value;
+            const location = document.getElementById('location').value;
+            const privacy = document.getElementById('privacy').value;
+            const imagePreview = document.getElementById('imagePreview').src;
+
+            if (!imagePreview) {
+                showToast('Please select an image to upload', true);
+                return;
+            }
+
+            if (!caption) {
+                showToast('Please add a caption', true);
+                return;
+            }
+
+            // Simulate upload process
+            showToast('Uploading post...');
+            
+            setTimeout(() => {
+                // Update user's coin balance
+                const userData = JSON.parse(localStorage.getItem('user')) || {};
+                const updatedData = {
+                    ...userData,
+                    coins: (userData.coins || 500) + 30 // Reward for posting
+                };
+                localStorage.setItem('user', JSON.stringify(updatedData));
+                
+                // Update coin balance display
+                document.getElementById('navCoinBalance').textContent = updatedData.coins + ' Coins';
+                
+                showToast('Post uploaded successfully! +30 coins');
+                
+                // Reset form
+                event.target.reset();
+                document.getElementById('previewContainer').classList.add('hidden');
+                document.getElementById('uploadIcon').classList.remove('hidden');
+            }, 2000);
+        }
+
+        function logout() {
+            localStorage.removeItem('user');
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+</html>
