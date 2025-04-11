@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earn Coins - InstaUp</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="../index.html" class="flex items-center">
+                        <i class="fas fa-rocket text-blue-600 text-2xl mr-2"></i>
+                        <span class="text-xl font-bold text-gray-800">InstaUp</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="earn-coins.html" class="flex items-center text-gray-700 hover:text-blue-600">
+                        <i class="fas fa-coins text-yellow-500 mr-1"></i>
+                        <span id="navCoinBalance">500 Coins</span>
+                    </a>
+                    <a href="upload.html" class="text-gray-700 hover:text-blue-600">Upload</a>
+                    <a href="profile.html" class="text-gray-700 hover:text-blue-600">Profile</a>
+                    <a href="login.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Login</a>
+                </div>
+                <div class="md:hidden">
+                    <button class="text-gray-700">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Coin Balance Section -->
+    <div class="bg-gradient-to-r from-blue-600 to-indigo-600 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl font-bold text-white">Your Coin Balance</h1>
+                <div class="mt-4 text-6xl font-bold text-yellow-400 flex items-center justify-center">
+                    <i class="fas fa-coins mr-3"></i>
+                    <span id="mainCoinBalance">500</span>
+                </div>
+                <p class="mt-2 text-gray-200">Complete tasks to earn more coins!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Task Cards Section -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <!-- Daily Bonus Card -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-calendar-check text-3xl text-blue-500"></i>
+                            <h3 class="ml-3 text-xl font-semibold text-gray-900">Daily Bonus</h3>
+                        </div>
+                        <span class="bg-blue-100 text-blue-800 text-sm font-semibold px-3 py-1 rounded-full">
+                            +50 coins
+                        </span>
+                    </div>
+                    <p class="text-gray-600">Claim your daily bonus! Available once every 24 hours.</p>
+                    <button id="dailyBonusBtn" onclick="claimDailyBonus()" 
+                            class="mt-4 w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-200 flex items-center justify-center">
+                        <i class="fas fa-gift mr-2"></i>
+                        Claim Now
+                    </button>
+                    <p id="dailyBonusTimer" class="mt-2 text-sm text-gray-500 text-center">Next claim in: 24:00:00</p>
+                </div>
+            </div>
+
+            <!-- Watch Video Card -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-play-circle text-3xl text-blue-500"></i>
+                            <h3 class="ml-3 text-xl font-semibold text-gray-900">Watch Video</h3>
+                        </div>
+                        <span class="bg-blue-100 text-blue-800 text-sm font-semibold px-3 py-1 rounded-full">
+                            +10 coins
+                        </span>
+                    </div>
+                    <p class="text-gray-600">Watch short videos to earn coins. New videos every hour!</p>
+                    <button onclick="watchVideo()" 
+                            class="mt-4 w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-200 flex items-center justify-center">
+                        <i class="fas fa-play mr-2"></i>
+                        Watch Now
+                    </button>
+                    <p class="mt-2 text-sm text-gray-500 text-center">5 videos available</p>
+                </div>
+            </div>
+
+            <!-- Share Content Card -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-share-alt text-3xl text-blue-500"></i>
+                            <h3 class="ml-3 text-xl font-semibold text-gray-900">Share Content</h3>
+                        </div>
+                        <span class="bg-blue-100 text-blue-800 text-sm font-semibold px-3 py-1 rounded-full">
+                            +20 coins
+                        </span>
+                    </div>
+                    <p class="text-gray-600">Share InstaUp with friends to earn bonus coins!</p>
+                    <button onclick="shareContent()" 
+                            class="mt-4 w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-200 flex items-center justify-center">
+                        <i class="fas fa-share mr-2"></i>
+                        Share Now
+                    </button>
+                    <div class="mt-4 flex justify-center space-x-4">
+                        <button class="text-gray-600 hover:text-blue-600"><i class="fab fa-facebook fa-lg"></i></button>
+                        <button class="text-gray-600 hover:text-blue-400"><i class="fab fa-twitter fa-lg"></i></button>
+                        <button class="text-gray-600 hover:text-pink-600"><i class="fab fa-instagram fa-lg"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Complete Profile Card -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-user-check text-3xl text-blue-500"></i>
+                            <h3 class="ml-3 text-xl font-semibold text-gray-900">Complete Profile</h3>
+                        </div>
+                        <span class="bg-blue-100 text-blue-800 text-sm font-semibold px-3 py-1 rounded-full">
+                            +100 coins
+                        </span>
+                    </div>
+                    <p class="text-gray-600">Complete your profile to earn a one-time bonus!</p>
+                    <button onclick="completeProfile()" 
+                            class="mt-4 w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-200 flex items-center justify-center">
+                        <i class="fas fa-user-edit mr-2"></i>
+                        Complete Now
+                    </button>
+                    <div class="mt-3">
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="bg-blue-600 h-2.5 rounded-full" style="width: 70%"></div>
+                        </div>
+                        <p class="mt-2 text-sm text-gray-500 text-center">70% completed</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Invite Friends Card -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-user-plus text-3xl text-blue-500"></i>
+                            <h3 class="ml-3 text-xl font-semibold text-gray-900">Invite Friends</h3>
+                        </div>
+                        <span class="bg-blue-100 text-blue-800 text-sm font-semibold px-3 py-1 rounded-full">
+                            +30 coins
+                        </span>
+                    </div>
+                    <p class="text-gray-600">Invite friends and earn coins when they join!</p>
+                    <div class="mt-4 relative">
+                        <input type="text" value="https://instaup.com/ref/user123" 
+                               class="w-full px-4 py-2 border rounded-lg bg-gray-50" readonly>
+                        <button onclick="copyReferralLink()" 
+                                class="absolute right-2 top-1/2 transform -translate-y-1/2 text-blue-600 hover:text-blue-800">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                    <p class="mt-2 text-sm text-gray-500 text-center">5 friends joined this week</p>
+                </div>
+            </div>
+
+            <!-- Achievement Card -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-trophy text-3xl text-blue-500"></i>
+                            <h3 class="ml-3 text-xl font-semibold text-gray-900">Achievements</h3>
+                        </div>
+                        <span class="bg-blue-100 text-blue-800 text-sm font-semibold px-3 py-1 rounded-full">
+                            Various Rewards
+                        </span>
+                    </div>
+                    <p class="text-gray-600">Complete achievements to earn bonus coins!</p>
+                    <div class="mt-4 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-600">First Share</span>
+                            <span class="text-sm font-semibold text-green-600">Completed</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-600">Watch 10 Videos</span>
+                            <span class="text-sm text-gray-600">7/10</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-600">Invite 5 Friends</span>
+                            <span class="text-sm text-gray-600">3/5</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-5 right-5 hidden bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg">
+        <div class="flex items-center">
+            <i class="fas fa-check-circle mr-2"></i>
+            <span id="toastMessage"></span>
+        </div>
+    </div>
+
+    <script>
+        // Coin balance management
+        let coinBalance = 500;
+        
+        function updateCoinBalance(amount) {
+            coinBalance += amount;
+            document.getElementById('mainCoinBalance').textContent = coinBalance;
+            document.getElementById('navCoinBalance').textContent = coinBalance + ' Coins';
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            toastMessage.textContent = message;
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
+        }
+
+        // Daily bonus functionality
+        let dailyBonusClaimed = false;
+        
+        function claimDailyBonus() {
+            if (!dailyBonusClaimed) {
+                updateCoinBalance(50);
+                showToast('Daily bonus claimed! +50 coins');
+                dailyBonusClaimed = true;
+                document.getElementById('dailyBonusBtn').disabled = true;
+                document.getElementById('dailyBonusBtn').classList.add('bg-gray-400');
+                startDailyBonusTimer();
+            }
+        }
+
+        function startDailyBonusTimer() {
+            let timeLeft = 24 * 60 * 60; // 24 hours in seconds
+            const timerDisplay = document.getElementById('dailyBonusTimer');
+            
+            const timer = setInterval(() => {
+                const hours = Math.floor(timeLeft / 3600);
+                const minutes = Math.floor((timeLeft % 3600) / 60);
+                const seconds = timeLeft % 60;
+                
+                timerDisplay.textContent = `Next claim in: ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                
+                if (timeLeft === 0) {
+                    clearInterval(timer);
+                    dailyBonusClaimed = false;
+                    document.getElementById('dailyBonusBtn').disabled = false;
+                    document.getElementById('dailyBonusBtn').classList.remove('bg-gray-400');
+                    timerDisplay.textContent = 'Available now!';
+                }
+                
+                timeLeft--;
+            }, 1000);
+        }
+
+        // Watch video functionality
+        function watchVideo() {
+            setTimeout(() => {
+                updateCoinBalance(10);
+                showToast('Video watched! +10 coins');
+            }, 3000);
+        }
+
+        // Share content functionality
+        function shareContent() {
+            updateCoinBalance(20);
+            showToast('Content shared! +20 coins');
+        }
+
+        // Complete profile functionality
+        function completeProfile() {
+            updateCoinBalance(100);
+            showToast('Profile completed! +100 coins');
+        }
+
+        // Copy referral link functionality
+        function copyReferralLink() {
+            const referralLink = "https://instaup.com/ref/user123";
+            navigator.clipboard.writeText(referralLink).then(() => {
+                showToast('Referral link copied to clipboard!');
+            });
+        }
+    </script>
+</body>
+</html>
