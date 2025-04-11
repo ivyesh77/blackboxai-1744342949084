@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - InstaUp</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="../index.html" class="flex items-center">
+                        <i class="fas fa-rocket text-blue-600 text-2xl mr-2"></i>
+                        <span class="text-xl font-bold text-gray-800">InstaUp</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="earn-coins.html" class="flex items-center text-gray-700 hover:text-blue-600">
+                        <i class="fas fa-coins text-yellow-500 mr-1"></i>
+                        <span id="navCoinBalance">500 Coins</span>
+                    </a>
+                    <a href="upload.html" class="text-gray-700 hover:text-blue-600">Upload</a>
+                    <a href="profile.html" class="text-gray-700 hover:text-blue-600">Profile</a>
+                    <button onclick="logout()" class="text-gray-700 hover:text-blue-600">Logout</button>
+                </div>
+                <div class="md:hidden">
+                    <button class="text-gray-700">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Profile Header -->
+    <div class="bg-white shadow">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="flex items-center">
+                    <div class="relative">
+                        <img class="h-24 w-24 rounded-full object-cover" 
+                             src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg" 
+                             alt="Profile picture">
+                        <button onclick="changeProfilePicture()" 
+                                class="absolute bottom-0 right-0 bg-blue-600 text-white rounded-full p-2 hover:bg-blue-700">
+                            <i class="fas fa-camera"></i>
+                        </button>
+                    </div>
+                    <div class="ml-6">
+                        <h1 class="text-2xl font-bold text-gray-900" id="profileUsername">Username</h1>
+                        <p class="text-gray-600" id="profileEmail">user@example.com</p>
+                        <div class="mt-2 flex items-center">
+                            <i class="fas fa-coins text-yellow-500 mr-1"></i>
+                            <span id="profileCoins" class="font-semibold">500 Coins</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 md:mt-0">
+                    <button onclick="editProfile()" 
+                            class="flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                        <i class="fas fa-edit mr-2"></i>
+                        Edit Profile
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Stats -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Achievements -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <h2 class="text-lg font-semibold text-gray-900 mb-4">
+                    <i class="fas fa-trophy text-yellow-500 mr-2"></i>
+                    Achievements
+                </h2>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <i class="fas fa-star text-blue-500 mr-2"></i>
+                            <span>First Share</span>
+                        </div>
+                        <span class="text-green-600">Completed</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <i class="fas fa-video text-blue-500 mr-2"></i>
+                            <span>Watch 10 Videos</span>
+                        </div>
+                        <span>7/10</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <i class="fas fa-users text-blue-500 mr-2"></i>
+                            <span>Invite Friends</span>
+                        </div>
+                        <span>3/5</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <h2 class="text-lg font-semibold text-gray-900 mb-4">
+                    <i class="fas fa-history text-blue-500 mr-2"></i>
+                    Recent Activity
+                </h2>
+                <div class="space-y-4">
+                    <div class="flex items-center">
+                        <i class="fas fa-coins text-yellow-500 mr-2"></i>
+                        <div>
+                            <p class="text-sm font-medium text-gray-900">Earned 50 coins</p>
+                            <p class="text-xs text-gray-500">Daily bonus claimed</p>
+                            <p class="text-xs text-gray-400">2 hours ago</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-share text-green-500 mr-2"></i>
+                        <div>
+                            <p class="text-sm font-medium text-gray-900">Shared content</p>
+                            <p class="text-xs text-gray-500">Earned 20 coins</p>
+                            <p class="text-xs text-gray-400">5 hours ago</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-video text-blue-500 mr-2"></i>
+                        <div>
+                            <p class="text-sm font-medium text-gray-900">Watched video</p>
+                            <p class="text-xs text-gray-500">Earned 10 coins</p>
+                            <p class="text-xs text-gray-400">Yesterday</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistics -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <h2 class="text-lg font-semibold text-gray-900 mb-4">
+                    <i class="fas fa-chart-bar text-purple-500 mr-2"></i>
+                    Statistics
+                </h2>
+                <div class="space-y-4">
+                    <div>
+                        <p class="text-sm text-gray-500">Total Coins Earned</p>
+                        <p class="text-2xl font-bold text-gray-900">1,250</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">Videos Watched</p>
+                        <p class="text-2xl font-bold text-gray-900">7</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">Content Shared</p>
+                        <p class="text-2xl font-bold text-gray-900">12</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">Friends Invited</p>
+                        <p class="text-2xl font-bold text-gray-900">3</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Profile Modal -->
+    <div id="editProfileModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden">
+        <div class="flex items-center justify-center min-h-screen">
+            <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-md">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold text-gray-900">Edit Profile</h3>
+                    <button onclick="closeEditModal()" class="text-gray-400 hover:text-gray-500">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <form id="editProfileForm" onsubmit="handleEditProfile(event)">
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Username</label>
+                            <input type="text" id="editUsername" 
+                                   class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Email</label>
+                            <input type="email" id="editEmail" 
+                                   class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Bio</label>
+                            <textarea id="editBio" rows="3" 
+                                      class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
+                        </div>
+                    </div>
+                    <div class="mt-6 flex justify-end space-x-3">
+                        <button type="button" onclick="closeEditModal()" 
+                                class="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50">
+                            Cancel
+                        </button>
+                        <button type="submit" 
+                                class="px-4 py-2 bg-blue-600 text-white rounded-md text-sm font-medium hover:bg-blue-700">
+                            Save Changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-5 right-5 hidden bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg">
+        <div class="flex items-center">
+            <i class="fas fa-check-circle mr-2"></i>
+            <span id="toastMessage"></span>
+        </div>
+    </div>
+
+    <script>
+        // Load user data
+        document.addEventListener('DOMContentLoaded', function() {
+            const userData = JSON.parse(localStorage.getItem('user')) || {
+                username: 'Username',
+                email: 'user@example.com',
+                coins: 500
+            };
+
+            document.getElementById('profileUsername').textContent = userData.username;
+            document.getElementById('profileEmail').textContent = userData.email;
+            document.getElementById('profileCoins').textContent = userData.coins + ' Coins';
+            document.getElementById('navCoinBalance').textContent = userData.coins + ' Coins';
+        });
+
+        function showToast(message, isError = false) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            
+            toast.classList.remove('bg-green-500', 'bg-red-500');
+            toast.classList.add(isError ? 'bg-red-500' : 'bg-green-500');
+            
+            toastMessage.textContent = message;
+            toast.classList.remove('hidden');
+            
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
+        }
+
+        function editProfile() {
+            const modal = document.getElementById('editProfileModal');
+            const userData = JSON.parse(localStorage.getItem('user')) || {};
+            
+            document.getElementById('editUsername').value = userData.username || '';
+            document.getElementById('editEmail').value = userData.email || '';
+            document.getElementById('editBio').value = userData.bio || '';
+            
+            modal.classList.remove('hidden');
+        }
+
+        function closeEditModal() {
+            document.getElementById('editProfileModal').classList.add('hidden');
+        }
+
+        function handleEditProfile(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('editUsername').value;
+            const email = document.getElementById('editEmail').value;
+            const bio = document.getElementById('editBio').value;
+
+            // Update user data
+            const userData = JSON.parse(localStorage.getItem('user')) || {};
+            const updatedData = {
+                ...userData,
+                username,
+                email,
+                bio
+            };
+
+            localStorage.setItem('user', JSON.stringify(updatedData));
+
+            // Update UI
+            document.getElementById('profileUsername').textContent = username;
+            document.getElementById('profileEmail').textContent = email;
+
+            closeEditModal();
+            showToast('Profile updated successfully');
+        }
+
+        function changeProfilePicture() {
+            // Simulate file upload
+            showToast('Profile picture update feature coming soon');
+        }
+
+        function logout() {
+            localStorage.removeItem('user');
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+</html>
